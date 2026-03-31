@@ -67,12 +67,16 @@ function guardarPrecios() {
 PRODUCTOS.forEach((nombre, i) => {
   const tr = document.createElement('tr');
   tr.innerHTML = `
-    <td><input type="number" min="0" step="1" placeholder="0" class="cant" id="cant-${i}"></td>
+    <td><input type="number" min="0" step="1" placeholder="0" class="cant" id="cant-${i}" oninput="calcFila(${i})"></td>
     <td class="prod-name">${nombre}</td>
-    <td><input type="number" min="0" step="0.1" placeholder="0.0" id="kg-${i}" oninput="calcFila(${i})"></td>
+    <td><input type="number" min="0" step="any" placeholder="0.0" id="kg-${i}" oninput="calcFila(${i})"></td>
     <td><input type="number" min="0" step="1" placeholder="0" id="px-${i}" readonly class="px-readonly"></td>
     <td class="subtotal-cell" id="sub-${i}">—</td>
   `;
+  tr.addEventListener('click', () => {
+  document.querySelectorAll('#tbody tr').forEach(r => r.classList.remove('active-row'));
+  tr.classList.add('active-row');
+});
   tbody.appendChild(tr);
 
   const row = document.createElement('tr');
@@ -277,7 +281,10 @@ function showSection(id) {
 
   if (id === 'boleta') {
     fillBoletaPricesFromMatrix();
-    document.querySelector('input[id^="kg-"]').focus();
+    setTimeout(() => {
+  const firstInput = document.querySelector('#tbody input');
+  if (firstInput) firstInput.focus();
+}, 50);
   }
 
   if (id === 'analisis') {
@@ -312,4 +319,51 @@ function renderInsights() {
 
 function verHistorial() {
   alert("📋 Historial de boletas\n\n- Boleta #008851\n- Boleta #008850\n- Boleta #008849\n\n(Próximamente conectado a base de datos)");
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const active = document.activeElement;
+
+    if (!active || active.tagName !== 'INPUT') return;
+
+    e.preventDefault();
+
+    const inputs = Array.from(document.querySelectorAll('#tbody input'));
+    const index = inputs.indexOf(active);
+
+    if (index > -1 && index < inputs.length - 1) {
+      inputs[index + 1].focus();
+    }
+  }
+});
+
+/* ─── SIDEBAR DE CLIENTES ─────────────────────────────────── */
+
+function toggleSidebar() {
+  const sidebar = document.getElementById('client-sidebar');
+  const openBtn = document.getElementById('sidebar-open-btn');
+  const isOpen = sidebar.classList.contains('open');
+
+  sidebar.classList.toggle('open');
+  openBtn.classList.toggle('hidden', !isOpen);
+}
+
+function selectClient(nombre) {
+  // Llenar el campo cliente en la boleta
+  const clienteInput = document.getElementById('cliente');
+  if (clienteInput) {
+    clienteInput.value = nombre;
+  }
+
+  // Marcar activo en sidebar
+  document.querySelectorAll('.sidebar-clients li').forEach(li => {
+    li.classList.toggle('active', li.textContent === nombre);
+  });
+
+  // Ir a boleta si no estamos ahí
+  const boletaSection = document.getElementById('boleta');
+  if (boletaSection && boletaSection.classList.contains('section-hidden')) {
+    showSection('boleta');
+  }
 }
