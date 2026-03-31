@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L.A.R.A Menudencias - Sistema de gestión integral</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="lara-wrap">
+    <header class="global-header">
+      <img src="ImageLog/LogoH.png" alt="L.A.R.A Menudencias" class="header-logo">
+    </header>
+
+    <section id="home">
+      <div class="main-menu">
+        <button class="menu-btn" onclick="showSection('boleta')">Cargar Boleta</button>
+        <button class="menu-btn" onclick="showSection('precios')">Gestionar Precios</button>
+        <button class="menu-btn" onclick="showSection('analisis')">Ver Análisis</button>
+        <button class="menu-btn" onclick="showSection('stock')">Stock</button>
+      </div>
+    </section>
+
+    <section id="boleta" class="section-hidden section-with-watermark">
+      <button class="btn-back" onclick="showHome()">← Volver</button>
+      <div class="lara-header">
+        <div class="header-left">
+          <div>
+            <div class="lara-logo">L.A.R.A <span>Menudencias</span></div>
+            <div class="lara-sub">Sistema de gestión · Carga de boleta</div>
+          </div>
+        </div>
+        <div class="lara-nro">N° <span id="nro-boleta">008852</span></div>
+      </div>
+
+      <div class="lara-body">
+        <div class="lara-meta">
+          <div class="lara-field">
+            <label>Fecha</label>
+            <input type="date" id="fecha" value="2026-03-27">
+          </div>
+          <div class="lara-field">
+            <label>Cliente</label>
+            <input type="text" id="cliente" list="clientes-list" placeholder="— Seleccionar —">
+            <datalist id="clientes-list">
+              <option value="Beto">
+              <option value="Don Pepe Carnes">
+              <option value="La Esquina del Asado">
+              <option value="Supermercado Central">
+              <option value="Restaurante Los Amigos">
+              <option value="Tienda de Barrio">
+            </datalist>
+          </div>
+          <div class="lara-field">
+            <label>Achurero</label>
+            <select id="achurero">
+              <option value="">— Seleccionar —</option>
+              <option>Daniel</option>
+              <option>Luis</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="lara-table-wrap">
+          <table class="lara-table" id="tabla-productos">
+            <thead>
+              <tr>
+                <th>CANT.</th>
+                <th>Artículo</th>
+                <th>Kilos</th>
+                <th>P. KILOS</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+
+        <div class="lara-footer">
+          <div class="lara-totals">
+            <div class="total-row">
+              <span class="total-label">Saldo anterior</span>
+              <span class="total-value"><input type="number" id="saldo-ant" value="0" style="background:transparent;border:none;border-bottom:1px solid rgba(127,119,221,0.3);color:#fff;font-size:14px;font-weight:500;width:90px;text-align:right;outline:none;" oninput="calcTotales()"></span>
+            </div>
+            <div class="total-row">
+              <span class="total-label">Total boleta</span>
+              <span class="total-value highlight" id="total-boleta">$ 0</span>
+            </div>
+            <div class="total-row">
+              <span class="total-label">Entrega</span>
+              <span class="total-value"><input type="number" id="entrega" value="0" style="background:transparent;border:none;border-bottom:1px solid rgba(127,119,221,0.3);color:#fff;font-size:14px;font-weight:500;width:90px;text-align:right;outline:none;" oninput="calcTotales()"></span>
+            </div>
+            <div class="total-row">
+              <span class="total-label">Debe</span>
+              <span class="total-value danger" id="debe">$ 0</span>
+            </div>
+          </div>
+          <div class="lara-actions">
+            <button class="btn-primary" onclick="guardarBoleta()">Guardar boleta</button>
+            <button class="btn-secondary" onclick="limpiarForm()">Nueva boleta</button>
+            <button class="btn-secondary" onclick="verHistorial()">Ver historial</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="precios" class="section-hidden section-with-watermark">
+      <button class="btn-back" onclick="showHome()">← Volver</button>
+      <div class="lara-actions" style="padding: 16px 24px;">
+        <button class="btn-primary" onclick="guardarPrecios()">Guardar precios</button>
+      </div>
+      <div class="lara-table-wrap" style="margin: 0 24px 24px;">
+        <table class="lara-table" id="tabla-precios">
+          <thead>
+            <tr>
+              <th>Artículo</th>
+              <th>Precio / kg</th>
+            </tr>
+          </thead>
+          <tbody id="precios-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="analisis" class="section-hidden section-with-watermark">
+      <button class="btn-back" onclick="showHome()">← Volver</button>
+      <div class="dashboard fade-in">
+        <div class="insights-box">
+          <h3>Insights automáticos</h3>
+          <ul id="insights-list"></ul>
+        </div>
+        <div class="metric-cards">
+          <div class="metric-card slide-up">
+            <div class="metric-title">Ventas del día</div>
+            <div class="metric-value">$ 150,000</div>
+          </div>
+          <div class="metric-card slide-up">
+            <div class="metric-title">Producto más vendido</div>
+            <div class="metric-value">Hígado</div>
+          </div>
+          <div class="metric-card slide-up">
+            <div class="metric-title">Total de operaciones</div>
+            <div class="metric-value">12</div>
+          </div>
+        </div>
+        <div class="chart-container">
+          <h3>Ventas por producto</h3>
+          <div class="bar-chart" id="bar-chart"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="stock" class="section-hidden section-with-watermark">
+      <button class="btn-back" onclick="showHome()">← Volver</button>
+      <div class="stock-header">
+        <div class="stock-tabs">
+          <button class="stock-tab active" onclick="showStockTab('carga')">Carga de Stock</button>
+          <button class="stock-tab" onclick="showStockTab('control')">Control de Stock</button>
+        </div>
+      </div>
+      <div class="stock-body">
+        <div id="stock-carga" class="stock-panel">
+          <div class="lara-table-wrap">
+            <table class="lara-table" id="tabla-stock">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Cantidad</th>
+                  <th>Kilos</th>
+                  <th>Precio Compra</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody id="stock-body"></tbody>
+            </table>
+          </div>
+        </div>
+        <div id="stock-control" class="stock-panel section-hidden">
+          <div class="lara-table-wrap">
+            <table class="lara-table">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Stock (kg)</th>
+                  <th>Stock (cantidad)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Hígado</td><td>120</td><td>24</td></tr>
+                <tr><td>Riñón</td><td>85</td><td>17</td></tr>
+                <tr><td>Corazón</td><td>74</td><td>14</td></tr>
+                <tr><td>Mondongo</td><td>210</td><td>35</td></tr>
+                <tr><td>C. de entraña</td><td>48</td><td>9</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- SIDEBAR: fuera del flujo normal -->
+<div class="client-sidebar" id="client-sidebar">
+  <div class="sidebar-header">
+    <span class="sidebar-title">Clientes</span>
+    <button class="sidebar-toggle" onclick="toggleSidebar()" title="Cerrar">✕</button>
+  </div>
+  <div class="sidebar-body">
+
+    <div class="sidebar-group">
+      <div class="sidebar-location">📍 Miramar</div>
+      <ul class="sidebar-clients">
+        <li onclick="selectClient('Beto')">Beto</li>
+        <li onclick="selectClient('Beto 2')">Beto2</li>
+        <li onclick="selectClient('La Esquina del Asado')">La Esquina del Asado</li>
+      </ul>
+    </div>
+
+    <div class="sidebar-group">
+      <div class="sidebar-location">📍 Mar del Plata</div>
+      <ul class="sidebar-clients">
+        <li onclick="selectClient('Supermercado Central')">Supermercado Central</li>
+        <li onclick="selectClient('Restaurante Los Amigos')">Restaurante Los Amigos</li>
+      </ul>
+    </div>
+
+    <div class="sidebar-group">
+      <div class="sidebar-location">📍 General Alvarado</div>
+      <ul class="sidebar-clients">
+        <li onclick="selectClient('Tienda de Barrio')">Tienda de Barrio</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- Botón flotante para abrir la sidebar -->
+<button class="sidebar-open-btn" id="sidebar-open-btn" onclick="toggleSidebar()" title="Ver clientes">
+  👥
+</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

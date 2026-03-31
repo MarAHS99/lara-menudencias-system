@@ -1,0 +1,914 @@
+:root {
+  --lara-dark: #13101a;
+  --lara-purple: #7F77DD;
+  --lara-purple-light: #EEEDFE;
+  --lara-purple-mid: #534AB7;
+  --lara-border: rgba(127,119,221,0.25);
+  --lara-row-hover: rgba(127,119,221,0.06);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #0a0a0a;
+  color: #fff;
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+}
+
+.lara-wrap {
+  background: var(--lara-dark);
+  border-radius: 14px;
+  border: 1px solid rgba(127,119,221,0.15);
+  padding: 0;
+  overflow: hidden;
+  font-family: system-ui, sans-serif;
+  max-width: 700px;
+  width: 100%;
+  margin: 20px auto;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+/* ─── HEADER GLOBAL ─────────────────────────────────────── */
+
+.global-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 120px;
+  padding: 0 32px;
+
+  background: rgba(19,16,26,0.95);
+  backdrop-filter: blur(10px);
+
+  border-bottom: 1px solid rgba(127,119,221,0.25);
+}
+
+.global-header .header-logo {
+  height: 110px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(127,119,221,0.5));
+}
+
+/* ─── HOME / MENÚ PRINCIPAL ─────────────────────────────── */
+
+#home {
+  padding-top: 8px;
+}
+
+.main-menu {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 32px;
+}
+
+.menu-btn {
+  padding: 28px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 16px;
+
+  border: 1px solid var(--lara-border);
+
+  background: linear-gradient(145deg, #1a1625, #221f35);
+  color: #fff;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  min-height: 110px;
+
+  box-shadow: 0 6px 25px rgba(0,0,0,0.4);
+}
+
+.menu-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  border-color: var(--lara-purple);
+  box-shadow: 0 12px 35px rgba(127,119,221,0.3);
+}
+
+/* ─── NAVEGACIÓN ─────────────────────────────────────────── */
+
+.btn-back {
+  display: inline-block;
+  margin: 16px 24px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--lara-border);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-back:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: var(--lara-purple);
+}
+
+/* ─── SECCIONES ─────────────────────────────────────────── */
+
+.section-hidden {
+  display: none;
+}
+
+/* ─── WATERMARK ─────────────────────────────────────────── */
+
+.section-with-watermark {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-with-watermark > * {
+  position: relative;
+  z-index: 1;
+}
+
+.section-with-watermark::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 380px;
+  height: 380px;
+  background-image: url('ImageLog/LogoH.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.06;
+  filter: blur(0.5px) grayscale(30%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── STOCK ─────────────────────────────────────────────── */
+
+.stock-header {
+  padding: 0 24px 16px;
+}
+
+.stock-tabs {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.stock-tab {
+  flex: 1;
+  min-width: 140px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.stock-tab.active,
+.stock-tab:hover {
+  background: linear-gradient(135deg, var(--lara-purple) 0%, var(--lara-purple-mid) 100%);
+  border-color: var(--lara-purple);
+}
+
+.stock-body {
+  padding: 0 24px 24px;
+}
+
+.stock-panel {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--lara-border);
+  border-radius: 16px;
+  padding: 24px;
+  color: rgba(255,255,255,0.9);
+}
+
+/* ─── CABECERA DE BOLETA ─────────────────────────────────── */
+
+.lara-header {
+  background: linear-gradient(135deg, var(--lara-dark) 0%, #1a1625 100%);
+  border-bottom: 1px solid var(--lara-border);
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.lara-logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.01em;
+}
+
+.lara-logo span {
+  color: var(--lara-purple);
+  text-shadow: 0 0 10px rgba(127,119,221,0.5);
+}
+
+.lara-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 2px;
+}
+
+.lara-nro {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--lara-purple);
+  background: linear-gradient(135deg, rgba(127,119,221,0.15) 0%, rgba(127,119,221,0.08) 100%);
+  border-radius: 8px;
+  padding: 12px 16px;
+  text-align: center;
+  border: 1px solid var(--lara-border);
+  box-shadow: 0 2px 8px rgba(127,119,221,0.1);
+  white-space: nowrap;
+}
+
+/* ─── BODY DE BOLETA ─────────────────────────────────────── */
+
+.lara-body {
+  padding: 20px 24px;
+}
+
+.lara-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.lara-field label {
+  display: block;
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.lara-field input,
+.lara-field select {
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  border: 2px solid var(--lara-border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: #fff;
+  font-size: 14px;
+  box-sizing: border-box;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.lara-field input:focus,
+.lara-field select:focus {
+  border-color: var(--lara-purple);
+  background: rgba(255,255,255,0.12);
+  box-shadow: 0 0 0 3px rgba(127,119,221,0.1);
+}
+
+.lara-field select option {
+  background: #1e1830;
+  color: #fff;
+}
+
+/* ─── TABLA ──────────────────────────────────────────────── */
+
+.lara-table-wrap {
+  border: 1px solid var(--lara-border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.lara-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.lara-table thead tr {
+  background: linear-gradient(135deg, rgba(127,119,221,0.2) 0%, rgba(127,119,221,0.1) 100%);
+}
+
+.lara-table thead th {
+  padding: 10px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--lara-purple);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: left;
+  border-bottom: 1px solid var(--lara-border);
+}
+
+.lara-table thead th:nth-child(1) {
+  width: 10%;
+  text-align: center;
+}
+
+.lara-table thead th:nth-child(2) {
+  width: 35%;
+}
+
+.lara-table thead th:nth-child(3) {
+  width: 15%;
+}
+
+.lara-table thead th:nth-child(4) {
+  width: 20%;
+}
+
+.lara-table thead th:nth-child(5) {
+  width: 20%;
+  text-align: right;
+}
+
+.lara-table tbody tr {
+  border-bottom: 1px solid rgba(127,119,221,0.06);
+  transition: all 0.2s ease;
+}
+
+.lara-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.lara-table tbody tr:hover {
+  background: var(--lara-row-hover);
+}
+
+.lara-table tbody tr:focus-within {
+  background: rgba(127,119,221,0.12);
+  box-shadow: inset 0 0 0 1px var(--lara-purple);
+}
+
+.lara-table tbody td {
+  padding: 6px 8px;
+}
+
+.prod-name {
+  font-size: 14px;
+  color: rgba(255,255,255,0.9);
+  font-weight: 500;
+}
+
+.lara-table tbody td input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(127,119,221,0.3);
+  color: #fff;
+  font-size: 13px;
+  padding: 2px 4px;
+  outline: none;
+  text-align: right;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.lara-table tbody td input:focus {
+  border-bottom-color: var(--lara-purple);
+  background: rgba(255,255,255,0.05);
+}
+
+.lara-table tbody td input[readonly],
+.lara-table tbody td input.px-readonly {
+  background: rgba(255,255,255,0.08);
+  border-bottom-color: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.7);
+  cursor: not-allowed;
+  font-weight: 600;
+}
+
+.cant {
+  font-weight: 600;
+  text-align: center;
+}
+
+.subtotal-cell {
+  font-size: 14px;
+  text-align: right;
+  font-weight: 700;
+  background: rgba(127,119,221,0.12);
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+/* ─── FOOTER DE BOLETA ───────────────────────────────────── */
+
+.lara-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.lara-totals {
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid var(--lara-border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(127,119,221,0.08);
+}
+
+.total-row:last-child {
+  border-bottom: none;
+}
+
+.total-label {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  font-weight: 500;
+}
+
+.total-value {
+  font-size: 16px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.total-value.highlight {
+  color: var(--lara-purple);
+  font-size: 20px;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(127,119,221,0.3);
+}
+
+.total-value.danger {
+  color: #ff6b6b;
+}
+
+.lara-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* ─── BOTONES ────────────────────────────────────────────── */
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--lara-purple) 0%, var(--lara-purple-mid) 100%);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(127,119,221,0.3);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--lara-purple-mid) 0%, var(--lara-purple) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(127,119,221,0.4);
+}
+
+.btn-secondary {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.8);
+  border: 2px solid var(--lara-border);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: var(--lara-purple);
+}
+
+/* ─── SECCIÓN PRECIOS ────────────────────────────────────── */
+
+#precios .lara-actions {
+  padding: 16px 24px;
+  flex-direction: row;
+}
+
+#precios .btn-primary {
+  width: auto;
+  min-width: 160px;
+}
+
+/* ─── DASHBOARD / ANÁLISIS ───────────────────────────────── */
+
+.dashboard {
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+}
+
+.metric-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.metric-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.03) 100%);
+  border: 1px solid rgba(127,119,221,0.25);
+  border-radius: 18px;
+  padding: 24px 20px;
+  text-align: center;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.45);
+  transition: all 0.35s ease;
+  backdrop-filter: blur(6px);
+  position: relative;
+  overflow: hidden;
+  animation: slideUp 0.5s ease both;
+}
+
+.metric-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(127,119,221,0.15), transparent 60%);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.metric-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.6);
+  border-color: var(--lara-purple);
+}
+
+.metric-title {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.metric-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.chart-container {
+  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.03) 100%);
+  border: 1px solid var(--lara-border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  width: 100%;
+}
+
+.chart-container h3 {
+  margin: 0 0 24px 0;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  height: 200px;
+  padding: 0;
+}
+
+.bar {
+  flex: 1;
+  background: linear-gradient(180deg, var(--lara-purple) 0%, var(--lara-purple-mid) 100%);
+  border-radius: 6px 6px 0 0;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  padding-bottom: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(127,119,221,0.3);
+  transform-origin: bottom;
+  animation: growBar 0.6s ease forwards;
+}
+
+.bar:hover {
+  opacity: 0.9;
+  transform: scaleX(1.05);
+}
+
+.bar-label {
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.7);
+  font-size: 11px;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+/* ─── INSIGHTS ───────────────────────────────────────────── */
+
+.insights-box {
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid var(--lara-border);
+  background: linear-gradient(135deg, rgba(127,119,221,0.08), rgba(127,119,221,0.03));
+  width: 100%;
+}
+
+.insights-box h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+#insights-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#insights-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+}
+
+#insights-list li:last-child {
+  border-bottom: none;
+}
+
+/* ─── ANIMACIONES ────────────────────────────────────────── */
+
+.fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.slide-up {
+  animation: slideUp 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes growBar {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── STAGGER DE CARDS ───────────────────────────────────── */
+
+.metric-card:nth-child(1) { animation-delay: 0.05s; }
+.metric-card:nth-child(2) { animation-delay: 0.10s; }
+.metric-card:nth-child(3) { animation-delay: 0.15s; }
+.metric-card:nth-child(4) { animation-delay: 0.20s; }
+
+/* ─── ESTADOS ACTIVOS ────────────────────────────────────── */
+
+.lara-table tbody tr.active-row {
+  background: rgba(127,119,221,0.18);
+}
+
+.menu-btn:active,
+.btn-primary:active,
+.btn-secondary:active {
+  transform: scale(0.96);
+}
+
+/* ─── LOADER ─────────────────────────────────────────────── */
+
+.loader {
+  border: 3px solid rgba(255,255,255,0.2);
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+/* ─── CLIENT SIDEBAR ─────────────────────────────────────── */
+
+.client-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 240px;
+  background: #1a1625;
+  border-right: 1px solid var(--lara-border);
+  box-shadow: 4px 0 24px rgba(0,0,0,0.5);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.client-sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid var(--lara-border);
+  flex-shrink: 0;
+}
+
+.sidebar-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.sidebar-toggle {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.4);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.sidebar-toggle:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+}
+
+.sidebar-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(127,119,221,0.3) transparent;
+}
+
+.sidebar-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-body::-webkit-scrollbar-thumb {
+  background: rgba(127,119,221,0.3);
+  border-radius: 4px;
+}
+
+.sidebar-group {
+  margin-bottom: 8px;
+}
+
+.sidebar-location {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--lara-purple);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 10px 16px 6px;
+}
+
+.sidebar-clients {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-clients li {
+  padding: 9px 16px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+  cursor: pointer;
+  border-radius: 0;
+  transition: all 0.15s ease;
+  border-left: 2px solid transparent;
+}
+
+.sidebar-clients li:hover {
+  background: rgba(127,119,221,0.1);
+  color: #fff;
+  border-left-color: var(--lara-purple);
+}
+
+.sidebar-clients li.active {
+  background: rgba(127,119,221,0.15);
+  color: #fff;
+  border-left-color: var(--lara-purple);
+  font-weight: 600;
+}
+
+/* ─── BOTÓN FLOTANTE PARA ABRIR ───────────────────────────── */
+
+.sidebar-open-btn {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 56px;
+  background: #1a1625;
+  border: 1px solid var(--lara-border);
+  border-left: none;
+  border-radius: 0 10px 10px 0;
+  color: rgba(255,255,255,0.7);
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 1999;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 3px 0 12px rgba(0,0,0,0.4);
+}
+
+.sidebar-open-btn:hover {
+  background: #221f35;
+  color: #fff;
+  width: 36px;
+  box-shadow: 4px 0 16px rgba(127,119,221,0.3);
+}
+
+.sidebar-open-btn.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
