@@ -8,291 +8,451 @@
 </head>
 <body>
   <div class="lara-wrap">
+
     <header class="global-header">
-      <img src="asetss/LogoH.png" alt="L.A.R.A Menudencias" class="header-logo">
+      <img src="assets/LogoH.png" alt="L.A.R.A Menudencias" class="header-logo">
     </header>
 
+    <!-- ═══════════════════════════════════════════════════════
+         HOME
+    ══════════════════════════════════════════════════════ -->
     <section id="home">
       <div class="main-menu">
-        <button class="menu-btn" onclick="showSection('boleta')">Cargar Boleta</button>
-        <button class="menu-btn" onclick="showSection('precios')">Gestionar Precios</button>
+        <button class="menu-btn" onclick="showSection('ventas')">Ventas</button>
+        <button class="menu-btn" onclick="showSection('compras')">Compras</button>
+        <button class="menu-btn" onclick="showSection('config')">Agregar/Quitar</button>
         <button class="menu-btn" onclick="showSection('analisis')">Ver Análisis</button>
-        <button class="menu-btn" onclick="showSection('stock')">Stock</button>
       </div>
     </section>
 
-    <section id="boleta" class="section-hidden section-with-watermark">
+    <!-- ═══════════════════════════════════════════════════════
+         VENTAS
+    ════════════════════════════════════════════════════════ -->
+    <section id="ventas" class="section-hidden section-with-watermark">
       <button class="btn-back" onclick="showHome()">← Volver</button>
-      <div class="lara-header">
-        <div class="header-left">
-          <div>
-            <div class="lara-logo">L.A.R.A <span>Menudencias</span></div>
-            <div class="lara-sub">Sistema de gestión · Carga de boleta</div>
-          </div>
-        </div>
-        <div class="lara-nro">N° <span id="nro-boleta">008852</span></div>
-      </div>
 
-      <div class="lara-body">
-        <div class="lara-meta">
-          <div class="lara-field">
-            <label>Fecha</label>
-            <input type="date" id="fecha" value="2026-03-27">
-          </div>
-          <div class="lara-field">
-            <label>Cliente</label>
-            <input type="text" id="cliente" list="clientes-list" placeholder="— Seleccionar —">
-            <datalist id="clientes-list">
-              <option value="Beto">
-              <option value="Don Pepe Carnes">
-              <option value="La Esquina del Asado">
-              <option value="Supermercado Central">
-              <option value="Restaurante Los Amigos">
-              <option value="Tienda de Barrio">
-            </datalist>
-          </div>
-          <div class="lara-field">
-            <label>Achurero</label>
-            <select id="achurero">
-              <option value="">— Seleccionar —</option>
-              <option>Daniel</option>
-              <option>Luis</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="lara-table-wrap">
-          <table class="lara-table" id="tabla-productos">
-            <thead>
-              <tr>
-                <th>CANT.</th>
-                <th>Artículo</th>
-                <th>Kilos</th>
-                <th>P. KILOS</th>
-                <th>Subtotal</th>
-              </tr>
-            </thead>
-            <tbody id="tbody"></tbody>
-          </table>
-        </div>
-
-        <div class="lara-footer">
-          <div class="lara-totals">
-            <div class="total-row">
-              <span class="total-label">Saldo anterior</span>
-              <span class="total-value"><input type="number" id="saldo-ant" value="0" style="background:transparent;border:none;border-bottom:1px solid rgba(127,119,221,0.3);color:#fff;font-size:14px;font-weight:500;width:90px;text-align:right;outline:none;" oninput="calcTotales()"></span>
-            </div>
-            <div class="total-row">
-              <span class="total-label">Total boleta</span>
-              <span class="total-value highlight" id="total-boleta">$ 0</span>
-            </div>
-            <div class="total-row">
-              <span class="total-label">Entrega</span>
-              <span class="total-value"><input type="number" id="entrega" value="0" style="background:transparent;border:none;border-bottom:1px solid rgba(127,119,221,0.3);color:#fff;font-size:14px;font-weight:500;width:90px;text-align:right;outline:none;" oninput="calcTotales()"></span>
-            </div>
-            <div class="total-row">
-              <span class="total-label">Debe</span>
-              <span class="total-value danger" id="debe">$ 0</span>
-            </div>
-          </div>
-          <div class="lara-actions">
-            <button class="btn-primary" onclick="guardarBoleta()">Guardar boleta</button>
-            <button class="btn-secondary" onclick="limpiarForm()">Nueva boleta</button>
-            <button class="btn-secondary" onclick="verHistorial()">Ver historial</button>
-          </div>
+      <div class="section-header">
+        <div class="section-tabs">
+          <button class="section-tab active" id="tab-ventas-crear"    onclick="showVentasTab('crear')">Crear Boleta</button>
+          <button class="section-tab"        id="tab-ventas-cc"       onclick="showVentasTab('cc')">Cuentas Corrientes</button>
+          <button class="section-tab"        id="tab-ventas-historial" onclick="showVentasTab('historial')">Historial</button>
         </div>
       </div>
-    </section>
 
-    <section id="precios" class="section-hidden section-with-watermark">
+      <!-- ventas-crear -->
+      <div id="ventas-crear" class="section-panel">
+        <div class="lara-header">
+          <div class="header-left">
+            <div>
+              <div class="lara-logo">L.A.R.A <span>Menudencias</span></div>
+              <div class="lara-sub">Sistema de gestión · Carga de boleta</div>
+            </div>
+          </div>
+          <div class="lara-nro">N° <span id="nro-boleta">008852</span></div>
+        </div>
+
+        <div class="lara-body">
+          <div class="lara-meta">
+            <div class="lara-field">
+              <label>Fecha</label>
+              <input type="date" id="fecha" value="2026-03-27">
+            </div>
+            <div class="lara-field">
+              <label>Cliente</label>
+              <input type="text" id="cliente" list="clientes-list" placeholder="— Seleccionar —">
+              <datalist id="clientes-list">
+                <option value="Beto">
+                <option value="Cecchi">
+                <option value="Campomar 1">
+                <option value="Campomar 2">
+                <option value="Luis Mitre">
+                <option value="Don Renato">
+                <option value="Nano">
+                <option value="Mingo">
+                <option value="Mario">
+                <option value="Parquemar">
+                <option value="La Tradicional">
+                <option value="Buena Vibra">
+                <option value="San Andres">
+                <option value="Manuel Gomero">
+                <option value="Angulo">
+                <option value="Pamela">
+                <option value="Turco Ducato">
+                <option value="El Mercadito">
+                <option value="El Audaz">
+                <option value="Chino Alvarado">
+                <option value="El Palenque">
+                <option value="Jose Soip">
+                <option value="Mauro Kalle">
+                <option value="Miguelito">
+                <option value="Tucu">
+                <option value="Vicente">
+                <option value="Pol">
+                <option value="Salucla">
+                <option value="Ale">
+                <option value="Italo Lo de Martin">
+                <option value="Gargiulo">
+                <option value="Globo">
+                <option value="Beades">
+                <option value="Chino Ota">
+                <option value="Padilla">
+                <option value="Balcarce Carnes">
+                <option value="Augusto">
+                <option value="Belmonte">
+                <option value="Patricia Eva y 106">
+                <option value="Guille 39">
+                <option value="Jorge Gutierrez">
+                <option value="Valeria Cajera BC 24 y 27">
+                <option value="Mauro Malena">
+                <option value="Todo Carne M.I.">
+                <option value="La Esq Avicola">
+                <option value="Mariela Balcarce">
+                <option value="19 y 22">
+                <option value="Turco Mechongue">
+                <option value="Tamara 13 y 10">
+                <option value="Frutimar 2">
+                <option value="Res">
+                <option value="Oscar 13 y 16">
+              </datalist>
+            </div>
+            <div class="lara-field">
+              <label>Achurero</label>
+              <select id="achurero">
+                <option value="">— Seleccionar —</option>
+                <option>Daniel</option>
+                <option>Luis</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="lara-table-wrap">
+            <table class="lara-table" id="tabla-productos">
+              <thead>
+                <tr>
+                  <th>CANT.</th>
+                  <th>Artículo</th>
+                  <th>Kilos</th>
+                  <th>P. KILOS</th>
+                  <th>Subtotal</th>
+                </tr>
+              </thead>
+              <tbody id="tbody"></tbody>
+            </table>
+          </div>
+
+          <div class="lara-footer">
+            <div class="lara-totals">
+              <div class="total-row">
+                <span class="total-label">Saldo anterior</span>
+                <span class="total-value"><input type="number" id="saldo-ant" value="0" style="background:transparent;border:none;border-bottom:1px solid rgba(127,119,221,0.3);color:#fff;font-size:14px;font-weight:500;width:90px;text-align:right;outline:none;" oninput="calcTotales()"></span>
+              </div>
+              <div class="total-row">
+                <span class="total-label">Total boleta</span>
+                <span class="total-value highlight" id="total-boleta">$ 0</span>
+              </div>
+              <div class="total-row">
+                <span class="total-label">Entrega</span>
+                <span class="total-value"><input type="number" id="entrega" value="0" style="background:transparent;border:none;border-bottom:1px solid rgba(127,119,221,0.3);color:#fff;font-size:14px;font-weight:500;width:90px;text-align:right;outline:none;" oninput="calcTotales()"></span>
+              </div>
+              <div class="total-row">
+                <span class="total-label">Debe</span>
+                <span class="total-value danger" id="debe">$ 0</span>
+              </div>
+            </div>
+            <div class="lara-actions">
+              <button class="btn-primary" onclick="guardarBoleta()">Guardar boleta</button>
+              <button class="btn-secondary" onclick="limpiarForm()">Nueva boleta</button>
+              <button class="btn-secondary" onclick="showVentasTab('historial')">Ver historial</button>
+            </div>
+          </div>
+        </div>
+      </div><!-- /ventas-crear -->
+
+      <!-- ventas-cc -->
+      <div id="ventas-cc" class="section-panel section-hidden">
+        <div class="section-body">
+          <div class="section-panel-inner" style="text-align:center; padding: 48px 24px;">
+            <div style="font-size: 32px; margin-bottom: 16px;">📒</div>
+            <div style="font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px;">Cuentas Corrientes</div>
+            <div style="font-size: 14px; color: rgba(255,255,255,0.4);">Próximamente disponible</div>
+          </div>
+        </div>
+      </div><!-- /ventas-cc -->
+
+      <!-- ventas-historial -->
+      <div id="ventas-historial" class="section-panel section-hidden">
+        <div class="section-body">
+          <div class="section-panel-inner" style="text-align:center; padding: 48px 24px;">
+            <div style="font-size: 32px; margin-bottom: 16px;">📋</div>
+            <div style="font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px;">Historial de Boletas</div>
+            <div style="font-size: 14px; color: rgba(255,255,255,0.4);">Próximamente disponible</div>
+          </div>
+        </div>
+      </div><!-- /ventas-historial -->
+
+    </section><!-- /ventas -->
+
+    <!-- ═══════════════════════════════════════════════════════
+         COMPRAS
+    ════════════════════════════════════════════════════════ -->
+    <section id="compras" class="section-hidden section-with-watermark">
       <button class="btn-back" onclick="showHome()">← Volver</button>
-      <div class="lara-actions" style="padding: 16px 24px;">
-        <button class="btn-primary" onclick="guardarPrecios()">Guardar precios</button>
-      </div>
-      <div class="lara-table-wrap" style="margin: 0 24px 24px;">
-        <table class="lara-table" id="tabla-precios">
-          <thead>
-            <tr>
-              <th>Artículo</th>
-              <th>Precio / kg</th>
-            </tr>
-          </thead>
-          <tbody id="precios-body"></tbody>
-        </table>
-      </div>
-    </section>
 
+      <div class="section-header">
+        <div class="section-tabs">
+          <button class="section-tab active" id="tab-compras-cargar" onclick="showComprasTab('cargar')">Cargar Compra</button>
+          <button class="section-tab"        id="tab-compras-auto"   onclick="showComprasTab('auto')">Stock Automático</button>
+          <button class="section-tab"        id="tab-compras-manual" onclick="showComprasTab('manual')">Stock Manual</button>
+        </div>
+      </div>
+
+      <!-- compras-cargar -->
+      <div id="compras-cargar" class="section-panel">
+        <div class="section-body">
+          <div class="section-panel-inner">
+            <div class="lara-table-wrap">
+              <table class="lara-table" id="tabla-stock">
+                <thead>
+                  <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Kilos</th>
+                    <th>Precio Compra</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody id="stock-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div><!-- /compras-cargar -->
+
+      <!-- compras-stock-auto -->
+      <div id="compras-stock-auto" class="section-panel section-hidden">
+        <div class="section-body">
+          <div class="section-panel-inner" style="text-align:center; padding: 48px 24px;">
+            <div style="font-size: 32px; margin-bottom: 16px;">📊</div>
+            <div style="font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px;">Stock Automático</div>
+            <div style="font-size: 14px; color: rgba(255,255,255,0.4);">Próximamente disponible</div>
+          </div>
+        </div>
+      </div><!-- /compras-stock-auto -->
+
+      <!-- compras-stock-manual -->
+      <div id="compras-stock-manual" class="section-panel section-hidden">
+        <div class="section-body">
+          <div class="section-panel-inner" style="text-align:center; padding: 48px 24px;">
+            <div style="font-size: 32px; margin-bottom: 16px;">📦</div>
+            <div style="font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px;">Stock Manual</div>
+            <div style="font-size: 14px; color: rgba(255,255,255,0.4);">Próximamente disponible</div>
+          </div>
+        </div>
+      </div><!-- /compras-stock-manual -->
+
+    </section><!-- /compras -->
+
+    <!-- ═══════════════════════════════════════════════════════
+         ANALISIS
+    ════════════════════════════════════════════════════════ -->
     <section id="analisis" class="section-hidden section-with-watermark">
       <button class="btn-back" onclick="showHome()">← Volver</button>
-      <div class="dashboard fade-in">
-        <div class="insights-box">
-          <h3>Insights automáticos</h3>
-          <ul id="insights-list"></ul>
-        </div>
-        <div class="metric-cards">
-          <div class="metric-card slide-up">
-            <div class="metric-title">Ventas del día</div>
-            <div class="metric-value">$ 150,000</div>
-          </div>
-          <div class="metric-card slide-up">
-            <div class="metric-title">Producto más vendido</div>
-            <div class="metric-value">Hígado</div>
-          </div>
-          <div class="metric-card slide-up">
-            <div class="metric-title">Total de operaciones</div>
-            <div class="metric-value">12</div>
-          </div>
-        </div>
-        <div class="chart-container">
-          <h3>Ventas por producto</h3>
-          <div class="bar-chart" id="bar-chart"></div>
+
+      <div class="section-header">
+        <div class="section-tabs">
+          <button class="section-tab active" id="tab-analisis-dashboard" onclick="showAnalisisTab('dashboard')">Dashboard</button>
+          <button class="section-tab"        id="tab-analisis-insights"  onclick="showAnalisisTab('insights')">Insights</button>
         </div>
       </div>
-    </section>
 
-    <section id="stock" class="section-hidden section-with-watermark">
+      <!-- analisis-dashboard -->
+      <div id="analisis-dashboard" class="section-panel">
+        <div class="section-body">
+          <div class="analisis-grid fade-in">
+            <div class="metric-cards">
+              <div class="metric-card slide-up">
+                <div class="metric-title">Ventas del día</div>
+                <div class="metric-value">$ 150,000</div>
+              </div>
+              <div class="metric-card slide-up">
+                <div class="metric-title">Producto más vendido</div>
+                <div class="metric-value">Hígado</div>
+              </div>
+              <div class="metric-card slide-up">
+                <div class="metric-title">Total de operaciones</div>
+                <div class="metric-value">12</div>
+              </div>
+            </div>
+            <div class="chart-container">
+              <h3>Ventas por producto</h3>
+              <div class="bar-chart" id="bar-chart"></div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /analisis-dashboard -->
+
+      <!-- analisis-insights -->
+      <div id="analisis-insights" class="section-panel section-hidden">
+        <div class="section-body">
+          <div class="section-panel-inner insights-box">
+            <h3>Insights automáticos</h3>
+            <ul id="insights-list"></ul>
+          </div>
+        </div>
+      </div><!-- /analisis-insights -->
+
+    </section><!-- /analisis -->
+
+    <!-- ═══════════════════════════════════════════════════════
+         CONFIG
+    ════════════════════════════════════════════════════════ -->
+    <section id="config" class="section-hidden section-with-watermark">
       <button class="btn-back" onclick="showHome()">← Volver</button>
-      <div class="stock-header">
-        <div class="stock-tabs">
-          <button class="stock-tab active" onclick="showStockTab('carga')">Carga de Stock</button>
-          <button class="stock-tab" onclick="showStockTab('control')">Control de Stock</button>
+
+      <div class="section-header">
+        <div class="section-tabs">
+          <button class="section-tab active" id="tab-config-productos"   onclick="showConfigTab('productos')">Productos</button>
+          <button class="section-tab"        id="tab-config-clientes"    onclick="showConfigTab('clientes')">Clientes</button>
+          <button class="section-tab"        id="tab-config-proveedores" onclick="showConfigTab('proveedores')">Proveedores</button>
         </div>
       </div>
-      <div class="stock-body">
-        <div id="stock-carga" class="stock-panel">
-          <div class="lara-table-wrap">
-            <table class="lara-table" id="tabla-stock">
-              <thead>
-                <tr>
-                  <th>Producto</th>
-                  <th>Cantidad</th>
-                  <th>Kilos</th>
-                  <th>Precio Compra</th>
-                  <th>Total</th>
-                </tr>
-              </thead>
-              <tbody id="stock-body"></tbody>
-            </table>
+
+      <!-- config-productos -->
+      <div id="config-productos" class="section-panel">
+        <div class="lara-actions" style="padding: 16px 24px;">
+          <button class="btn-primary" onclick="guardarPrecios()">Guardar precios</button>
+        </div>
+        <div class="lara-table-wrap" style="margin: 0 24px 24px;">
+          <table class="lara-table" id="tabla-precios">
+            <thead>
+              <tr>
+                <th>Artículo</th>
+                <th>Precio / kg</th>
+              </tr>
+            </thead>
+            <tbody id="precios-body"></tbody>
+          </table>
+        </div>
+      </div><!-- /config-productos -->
+
+      <!-- config-clientes -->
+      <div id="config-clientes" class="section-panel section-hidden">
+        <div class="section-body">
+          <div class="section-panel-inner" style="text-align:center; padding: 48px 24px;">
+            <div style="font-size: 32px; margin-bottom: 16px;">👥</div>
+            <div style="font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px;">Clientes</div>
+            <div style="font-size: 14px; color: rgba(255,255,255,0.4);">Próximamente disponible</div>
           </div>
         </div>
-        <div id="stock-control" class="stock-panel section-hidden">
-          <div class="lara-table-wrap">
-            <table class="lara-table">
-              <thead>
-                <tr>
-                  <th>Producto</th>
-                  <th>Stock (kg)</th>
-                  <th>Stock (cantidad)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>Hígado</td><td>120</td><td>24</td></tr>
-                <tr><td>Riñón</td><td>85</td><td>17</td></tr>
-                <tr><td>Corazón</td><td>74</td><td>14</td></tr>
-                <tr><td>Mondongo</td><td>210</td><td>35</td></tr>
-                <tr><td>C. de entraña</td><td>48</td><td>9</td></tr>
-              </tbody>
-            </table>
+      </div><!-- /config-clientes -->
+
+      <!-- config-proveedores -->
+      <div id="config-proveedores" class="section-panel section-hidden">
+        <div class="section-body">
+          <div class="section-panel-inner" style="text-align:center; padding: 48px 24px;">
+            <div style="font-size: 32px; margin-bottom: 16px;">🏭</div>
+            <div style="font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px;">Proveedores</div>
+            <div style="font-size: 14px; color: rgba(255,255,255,0.4);">Próximamente disponible</div>
           </div>
         </div>
+      </div><!-- /config-proveedores -->
+
+    </section><!-- /config -->
+
+    <!-- ═══════════════════════════════════════════════════════
+         SIDEBAR CLIENTES
+    ════════════════════════════════════════════════════════ -->
+    <div class="client-sidebar" id="client-sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-title">Clientes</span>
+        <button class="sidebar-toggle" onclick="toggleSidebar()" title="Cerrar">✕</button>
       </div>
-    </section>
-    <!-- SIDEBAR: fuera del flujo normal -->
-<div class="client-sidebar" id="client-sidebar">
-  <div class="sidebar-header">
-    <span class="sidebar-title">Clientes</span>
-    <button class="sidebar-toggle" onclick="toggleSidebar()" title="Cerrar">✕</button>
-  </div>
-  <div class="sidebar-body">
+      <div class="sidebar-body">
 
-  <!-- MIRAMAR -->
-  <div class="sidebar-group">
-    <div class="sidebar-location">📍 Miramar</div>
-    <ul class="sidebar-clients">
-      <li onclick="selectClient('Beto')">Beto</li>
-      <li onclick="selectClient('Cecchi')">Cecchi</li>
-      <li onclick="selectClient('Campomar 1')">Campomar 1</li>
-      <li onclick="selectClient('Campomar 2')">Campomar 2</li>
-      <li onclick="selectClient('Luis Mitre')">Luis Mitre</li>
-      <li onclick="selectClient('Don Renato')">Don Renato</li>
-      <li onclick="selectClient('Nano')">Nano</li>
-      <li onclick="selectClient('Mingo')">Mingo</li>
-      <li onclick="selectClient('Mario')">Mario</li>
-      <li onclick="selectClient('Parquemar')">Parquemar</li>
-      <li onclick="selectClient('La Tradicional')">La Tradicional</li>
-      <li onclick="selectClient('Buena Vibra')">Buena Vibra</li>
-      <li onclick="selectClient('San Andres')">San Andres</li>
-      <li onclick="selectClient('Manuel Gomero')">Manuel Gomero</li>
-      <li onclick="selectClient('Angulo')">Angulo</li>
-      <li onclick="selectClient('Pamela')">Pamela</li>
-      <li onclick="selectClient('Turco Ducato')">Turco Ducato</li>
-      <li onclick="selectClient('El Mercadito')">El Mercadito</li>
-      <li onclick="selectClient('El Audaz')">El Audaz</li>
-    </ul>
-  </div>
+        <div class="sidebar-group">
+          <div class="sidebar-location">📍 Miramar</div>
+          <ul class="sidebar-clients">
+            <li onclick="selectClient('Beto')">Beto</li>
+            <li onclick="selectClient('Cecchi')">Cecchi</li>
+            <li onclick="selectClient('Campomar 1')">Campomar 1</li>
+            <li onclick="selectClient('Campomar 2')">Campomar 2</li>
+            <li onclick="selectClient('Luis Mitre')">Luis Mitre</li>
+            <li onclick="selectClient('Don Renato')">Don Renato</li>
+            <li onclick="selectClient('Nano')">Nano</li>
+            <li onclick="selectClient('Mingo')">Mingo</li>
+            <li onclick="selectClient('Mario')">Mario</li>
+            <li onclick="selectClient('Parquemar')">Parquemar</li>
+            <li onclick="selectClient('La Tradicional')">La Tradicional</li>
+            <li onclick="selectClient('Buena Vibra')">Buena Vibra</li>
+            <li onclick="selectClient('San Andres')">San Andres</li>
+            <li onclick="selectClient('Manuel Gomero')">Manuel Gomero</li>
+            <li onclick="selectClient('Angulo')">Angulo</li>
+            <li onclick="selectClient('Pamela')">Pamela</li>
+            <li onclick="selectClient('Turco Ducato')">Turco Ducato</li>
+            <li onclick="selectClient('El Mercadito')">El Mercadito</li>
+            <li onclick="selectClient('El Audaz')">El Audaz</li>
+          </ul>
+        </div>
 
-  <!-- MAR DEL PLATA -->
-  <div class="sidebar-group">
-    <div class="sidebar-location">📍 Mar del Plata</div>
-    <ul class="sidebar-clients">
-      <li onclick="selectClient('Chino Alvarado')">Chino Alvarado</li>
-      <li onclick="selectClient('El Palenque')">El Palenque</li>
-      <li onclick="selectClient('Jose Soip')">Jose Soip</li>
-      <li onclick="selectClient('Mauro Kalle')">Mauro Kalle</li>
-      <li onclick="selectClient('Miguelito')">Miguelito</li>
-      <li onclick="selectClient('Tucu')">Tucu</li>
-      <li onclick="selectClient('Vicente')">Vicente</li>
-      <li onclick="selectClient('Pol')">Pol</li>
-      <li onclick="selectClient('Salucla')">Salucla</li>
-      <li onclick="selectClient('Ale')">Ale</li>
-      <li onclick="selectClient('Italo Lo de Martin')">Italo Lo de Martin</li>
-    </ul>
-  </div>
+        <div class="sidebar-group">
+          <div class="sidebar-location">📍 Mar del Plata</div>
+          <ul class="sidebar-clients">
+            <li onclick="selectClient('Chino Alvarado')">Chino Alvarado</li>
+            <li onclick="selectClient('El Palenque')">El Palenque</li>
+            <li onclick="selectClient('Jose Soip')">Jose Soip</li>
+            <li onclick="selectClient('Mauro Kalle')">Mauro Kalle</li>
+            <li onclick="selectClient('Miguelito')">Miguelito</li>
+            <li onclick="selectClient('Tucu')">Tucu</li>
+            <li onclick="selectClient('Vicente')">Vicente</li>
+            <li onclick="selectClient('Pol')">Pol</li>
+            <li onclick="selectClient('Salucla')">Salucla</li>
+            <li onclick="selectClient('Ale')">Ale</li>
+            <li onclick="selectClient('Italo Lo de Martin')">Italo Lo de Martin</li>
+          </ul>
+        </div>
 
-  <!-- OTAMENDI -->
-  <div class="sidebar-group">
-    <div class="sidebar-location">📍 Otamendi</div>
-    <ul class="sidebar-clients">
-      <li onclick="selectClient('Gargiulo')">Gargiulo</li>
-      <li onclick="selectClient('Globo')">Globo</li>
-      <li onclick="selectClient('Beades')">Beades</li>
-      <li onclick="selectClient('Chino Ota')">Chino Ota</li>
-      <li onclick="selectClient('Padilla')">Padilla</li>
-    </ul>
-  </div>
+        <div class="sidebar-group">
+          <div class="sidebar-location">📍 Otamendi</div>
+          <ul class="sidebar-clients">
+            <li onclick="selectClient('Gargiulo')">Gargiulo</li>
+            <li onclick="selectClient('Globo')">Globo</li>
+            <li onclick="selectClient('Beades')">Beades</li>
+            <li onclick="selectClient('Chino Ota')">Chino Ota</li>
+            <li onclick="selectClient('Padilla')">Padilla</li>
+          </ul>
+        </div>
 
-  <!-- BALCARCE -->
-  <div class="sidebar-group">
-    <div class="sidebar-location">📍 Balcarce</div>
-    <ul class="sidebar-clients">
-      <li onclick="selectClient('Balcarce Carnes')">Balcarce Carnes</li>
-      <li onclick="selectClient('Augusto')">Augusto</li>
-      <li onclick="selectClient('Belmonte')">Belmonte</li>
-      <li onclick="selectClient('Patricia Eva y 106')">Patricia Eva y 106</li>
-      <li onclick="selectClient('Guille 39')">Guille 39</li>
-      <li onclick="selectClient('Jorge Gutierrez')">Jorge Gutierrez</li>
-      <li onclick="selectClient('Valeria Cajera BC 24 y 27')">Valeria Cajera BC 24 y 27</li>
-      <li onclick="selectClient('Mauro Malena')">Mauro Malena</li>
-      <li onclick="selectClient('Todo Carne M.I.')">Todo Carne M.I.</li>
-      <li onclick="selectClient('La Esq Avicola')">La Esq Avicola</li>
-      <li onclick="selectClient('Mariela Balcarce')">Mariela Balcarce</li>
-      <li onclick="selectClient('19 y 22')">19 y 22</li>
-      <li onclick="selectClient('Turco Mechongue')">Turco Mechongue</li>
-      <li onclick="selectClient('Tamara 13 y 10')">Tamara 13 y 10</li>
-      <li onclick="selectClient('Frutimar 2')">Frutimar 2</li>
-      <li onclick="selectClient('Res')">Res</li>
-      <li onclick="selectClient('Oscar 13 y 16')">Oscar 13 y 16</li>
-    </ul>
-  </div>
+        <div class="sidebar-group">
+          <div class="sidebar-location">📍 Balcarce</div>
+          <ul class="sidebar-clients">
+            <li onclick="selectClient('Balcarce Carnes')">Balcarce Carnes</li>
+            <li onclick="selectClient('Augusto')">Augusto</li>
+            <li onclick="selectClient('Belmonte')">Belmonte</li>
+            <li onclick="selectClient('Patricia Eva y 106')">Patricia Eva y 106</li>
+            <li onclick="selectClient('Guille 39')">Guille 39</li>
+            <li onclick="selectClient('Jorge Gutierrez')">Jorge Gutierrez</li>
+            <li onclick="selectClient('Valeria Cajera BC 24 y 27')">Valeria Cajera BC 24 y 27</li>
+            <li onclick="selectClient('Mauro Malena')">Mauro Malena</li>
+            <li onclick="selectClient('Todo Carne M.I.')">Todo Carne M.I.</li>
+            <li onclick="selectClient('La Esq Avicola')">La Esq Avicola</li>
+            <li onclick="selectClient('Mariela Balcarce')">Mariela Balcarce</li>
+            <li onclick="selectClient('19 y 22')">19 y 22</li>
+            <li onclick="selectClient('Turco Mechongue')">Turco Mechongue</li>
+            <li onclick="selectClient('Tamara 13 y 10')">Tamara 13 y 10</li>
+            <li onclick="selectClient('Frutimar 2')">Frutimar 2</li>
+            <li onclick="selectClient('Res')">Res</li>
+            <li onclick="selectClient('Oscar 13 y 16')">Oscar 13 y 16</li>
+          </ul>
+        </div>
 
-</div>
-</div>
+      </div>
+    </div>
 
-<!-- Botón flotante para abrir la sidebar -->
-<button class="sidebar-open-btn" id="sidebar-open-btn" onclick="toggleSidebar()" title="Ver clientes">
-  👥
-</button>
-  </div>
+    <button class="sidebar-open-btn" id="sidebar-open-btn" onclick="toggleSidebar()" title="Ver clientes">
+      👥
+    </button>
+
+  </div><!-- /.lara-wrap -->
 
   <script src="script.js"></script>
 </body>
