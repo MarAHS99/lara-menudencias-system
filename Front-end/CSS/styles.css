@@ -20,6 +20,8 @@ html, body {
   line-height: 1.5;
 }
 
+/* ─── WRAP ───────────────────────────────────────────────── */
+
 .lara-wrap {
   background: var(--lara-dark);
   border-radius: 14px;
@@ -33,23 +35,19 @@ html, body {
   box-shadow: 0 10px 40px rgba(0,0,0,0.5);
 }
 
-/* ─── HEADER GLOBAL ─────────────────────────────────────── */
+/* ─── GLOBAL HEADER ──────────────────────────────────────── */
 
 .global-header {
   position: sticky;
   top: 0;
   z-index: 1000;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   height: 120px;
   padding: 0 32px;
-
   background: rgba(19,16,26,0.95);
   backdrop-filter: blur(10px);
-
   border-bottom: 1px solid rgba(127,119,221,0.25);
 }
 
@@ -60,7 +58,7 @@ html, body {
   filter: drop-shadow(0 0 10px rgba(127,119,221,0.5));
 }
 
-/* ─── HOME / MENÚ PRINCIPAL ─────────────────────────────── */
+/* ─── HOME ───────────────────────────────────────────────── */
 
 #home {
   padding-top: 8px;
@@ -78,22 +76,16 @@ html, body {
   font-size: 16px;
   font-weight: 700;
   border-radius: 16px;
-
   border: 1px solid var(--lara-border);
-
   background: linear-gradient(145deg, #1a1625, #221f35);
   color: #fff;
-
   cursor: pointer;
   transition: all 0.25s ease;
-
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-
   min-height: 110px;
-
   box-shadow: 0 6px 25px rgba(0,0,0,0.4);
 }
 
@@ -103,7 +95,11 @@ html, body {
   box-shadow: 0 12px 35px rgba(127,119,221,0.3);
 }
 
-/* ─── NAVEGACIÓN ─────────────────────────────────────────── */
+.menu-btn:active {
+  transform: scale(0.96);
+}
+
+/* ─── BTN BACK ───────────────────────────────────────────── */
 
 .btn-back {
   display: inline-block;
@@ -124,13 +120,13 @@ html, body {
   border-color: var(--lara-purple);
 }
 
-/* ─── SECCIONES ─────────────────────────────────────────── */
+/* ─── SECTION VISIBILITY ─────────────────────────────────── */
 
 .section-hidden {
   display: none;
 }
 
-/* ─── WATERMARK ─────────────────────────────────────────── */
+/* ─── WATERMARK ──────────────────────────────────────────── */
 
 .section-with-watermark {
   position: relative;
@@ -160,42 +156,60 @@ html, body {
   z-index: 0;
 }
 
-/* ─── STOCK ─────────────────────────────────────────────── */
+/* ─── SECTION ARCHITECTURE ───────────────────────────────── */
+/*
+  .section-header   → wraps the tab bar
+  .section-tabs     → flex container for tabs
+  .section-tab      → individual tab button
+  .section-body     → padding wrapper for panel content
+  .section-panel    → top-level subsection container (replaces ventas-panel, stock-panel)
+  .section-panel-inner → inner card (replaces stock-panel inner box)
+*/
 
-.stock-header {
+.section-header {
   padding: 0 24px 16px;
 }
 
-.stock-tabs {
+.section-tabs {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
 }
 
-.stock-tab {
+.section-tab {
   flex: 1;
-  min-width: 140px;
+  min-width: 120px;
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.15);
   padding: 12px 14px;
   border-radius: 12px;
   color: #fff;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
+  text-align: center;
 }
 
-.stock-tab.active,
-.stock-tab:hover {
+.section-tab.active,
+.section-tab:hover {
   background: linear-gradient(135deg, var(--lara-purple) 0%, var(--lara-purple-mid) 100%);
   border-color: var(--lara-purple);
 }
 
-.stock-body {
+.section-body {
   padding: 0 24px 24px;
 }
 
-.stock-panel {
+.section-panel {
+  display: block;
+}
+
+.section-panel.section-hidden {
+  display: none;
+}
+
+.section-panel-inner {
   background: rgba(255,255,255,0.04);
   border: 1px solid var(--lara-border);
   border-radius: 16px;
@@ -203,7 +217,7 @@ html, body {
   color: rgba(255,255,255,0.9);
 }
 
-/* ─── CABECERA DE BOLETA ─────────────────────────────────── */
+/* ─── BOLETA HEADER ──────────────────────────────────────── */
 
 .lara-header {
   background: linear-gradient(135deg, var(--lara-dark) 0%, #1a1625 100%);
@@ -260,7 +274,7 @@ html, body {
   white-space: nowrap;
 }
 
-/* ─── BODY DE BOLETA ─────────────────────────────────────── */
+/* ─── BOLETA BODY ────────────────────────────────────────── */
 
 .lara-body {
   padding: 20px 24px;
@@ -309,7 +323,7 @@ html, body {
   color: #fff;
 }
 
-/* ─── TABLA ──────────────────────────────────────────────── */
+/* ─── TABLE ──────────────────────────────────────────────── */
 
 .lara-table-wrap {
   border: 1px solid var(--lara-border);
@@ -340,41 +354,21 @@ html, body {
   border-bottom: 1px solid var(--lara-border);
 }
 
-.lara-table thead th:nth-child(1) {
-  width: 10%;
-  text-align: center;
-}
-
-.lara-table thead th:nth-child(2) {
-  width: 35%;
-}
-
-.lara-table thead th:nth-child(3) {
-  width: 15%;
-}
-
-.lara-table thead th:nth-child(4) {
-  width: 20%;
-}
-
-.lara-table thead th:nth-child(5) {
-  width: 20%;
-  text-align: right;
-}
+.lara-table thead th:nth-child(1) { width: 10%; text-align: center; }
+.lara-table thead th:nth-child(2) { width: 35%; }
+.lara-table thead th:nth-child(3) { width: 15%; }
+.lara-table thead th:nth-child(4) { width: 20%; }
+.lara-table thead th:nth-child(5) { width: 20%; text-align: right; }
 
 .lara-table tbody tr {
   border-bottom: 1px solid rgba(127,119,221,0.06);
   transition: all 0.2s ease;
 }
 
-.lara-table tbody tr:last-child {
-  border-bottom: none;
-}
+.lara-table tbody tr:last-child { border-bottom: none; }
 
-.lara-table tbody tr:hover {
-  background: var(--lara-row-hover);
-}
-
+.lara-table tbody tr:hover        { background: var(--lara-row-hover); }
+.lara-table tbody tr.active-row   { background: rgba(127,119,221,0.18); }
 .lara-table tbody tr:focus-within {
   background: rgba(127,119,221,0.12);
   box-shadow: inset 0 0 0 1px var(--lara-purple);
@@ -432,7 +426,7 @@ html, body {
   padding: 2px 6px;
 }
 
-/* ─── FOOTER DE BOLETA ───────────────────────────────────── */
+/* ─── BOLETA FOOTER ──────────────────────────────────────── */
 
 .lara-footer {
   display: grid;
@@ -457,9 +451,7 @@ html, body {
   border-bottom: 1px solid rgba(127,119,221,0.08);
 }
 
-.total-row:last-child {
-  border-bottom: none;
-}
+.total-row:last-child { border-bottom: none; }
 
 .total-label {
   font-size: 13px;
@@ -480,9 +472,7 @@ html, body {
   text-shadow: 0 0 10px rgba(127,119,221,0.3);
 }
 
-.total-value.danger {
-  color: #ff6b6b;
-}
+.total-value.danger { color: #ff6b6b; }
 
 .lara-actions {
   display: flex;
@@ -491,7 +481,7 @@ html, body {
   justify-content: flex-end;
 }
 
-/* ─── BOTONES ────────────────────────────────────────────── */
+/* ─── BUTTONS ────────────────────────────────────────────── */
 
 .btn-primary {
   background: linear-gradient(135deg, var(--lara-purple) 0%, var(--lara-purple-mid) 100%);
@@ -513,6 +503,8 @@ html, body {
   box-shadow: 0 8px 25px rgba(127,119,221,0.4);
 }
 
+.btn-primary:active { transform: scale(0.96); }
+
 .btn-secondary {
   background: rgba(255,255,255,0.08);
   color: rgba(255,255,255,0.8);
@@ -531,28 +523,28 @@ html, body {
   border-color: var(--lara-purple);
 }
 
-/* ─── SECCIÓN PRECIOS ────────────────────────────────────── */
+.btn-secondary:active { transform: scale(0.96); }
 
-#precios .lara-actions {
+/* ─── CONFIG PRODUCTOS ───────────────────────────────────── */
+
+#config-productos .lara-actions {
   padding: 16px 24px;
   flex-direction: row;
 }
 
-#precios .btn-primary {
+#config-productos .btn-primary {
   width: auto;
   min-width: 160px;
 }
 
-/* ─── DASHBOARD / ANÁLISIS ───────────────────────────────── */
+/* ─── ANALISIS ───────────────────────────────────────────── */
 
-.dashboard {
-  padding: 24px;
-  max-width: 900px;
-  margin: 0 auto;
+.analisis-grid {
   display: flex;
   flex-direction: column;
   gap: 32px;
   align-items: center;
+  width: 100%;
 }
 
 .metric-cards {
@@ -629,7 +621,6 @@ html, body {
   justify-content: space-between;
   gap: 16px;
   height: 200px;
-  padding: 0;
 }
 
 .bar {
@@ -696,57 +687,22 @@ html, body {
   color: rgba(255,255,255,0.8);
 }
 
-#insights-list li:last-child {
-  border-bottom: none;
-}
+#insights-list li:last-child { border-bottom: none; }
 
-/* ─── ANIMACIONES ────────────────────────────────────────── */
+/* ─── ANIMATIONS ─────────────────────────────────────────── */
 
-.fade-in {
-  animation: fadeIn 0.4s ease forwards;
-}
+.fade-in  { animation: fadeIn  0.4s ease forwards; }
+.slide-up { animation: slideUp 0.4s ease forwards; }
 
-.slide-up {
-  animation: slideUp 0.4s ease forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes growBar {
-  from { transform: scaleY(0); }
-  to   { transform: scaleY(1); }
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* ─── STAGGER DE CARDS ───────────────────────────────────── */
+@keyframes fadeIn  { from { opacity: 0; }                        to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes growBar { from { transform: scaleY(0); }              to { transform: scaleY(1); } }
+@keyframes spin    { to   { transform: rotate(360deg); } }
 
 .metric-card:nth-child(1) { animation-delay: 0.05s; }
 .metric-card:nth-child(2) { animation-delay: 0.10s; }
 .metric-card:nth-child(3) { animation-delay: 0.15s; }
 .metric-card:nth-child(4) { animation-delay: 0.20s; }
-
-/* ─── ESTADOS ACTIVOS ────────────────────────────────────── */
-
-.lara-table tbody tr.active-row {
-  background: rgba(127,119,221,0.18);
-}
-
-.menu-btn:active,
-.btn-primary:active,
-.btn-secondary:active {
-  transform: scale(0.96);
-}
 
 /* ─── LOADER ─────────────────────────────────────────────── */
 
@@ -780,9 +736,7 @@ html, body {
   transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.client-sidebar.open {
-  transform: translateX(0);
-}
+.client-sidebar.open { transform: translateX(0); }
 
 .sidebar-header {
   display: flex;
@@ -826,18 +780,10 @@ html, body {
   scrollbar-color: rgba(127,119,221,0.3) transparent;
 }
 
-.sidebar-body::-webkit-scrollbar {
-  width: 4px;
-}
+.sidebar-body::-webkit-scrollbar       { width: 4px; }
+.sidebar-body::-webkit-scrollbar-thumb { background: rgba(127,119,221,0.3); border-radius: 4px; }
 
-.sidebar-body::-webkit-scrollbar-thumb {
-  background: rgba(127,119,221,0.3);
-  border-radius: 4px;
-}
-
-.sidebar-group {
-  margin-bottom: 8px;
-}
+.sidebar-group { margin-bottom: 8px; }
 
 .sidebar-location {
   font-size: 11px;
@@ -859,7 +805,6 @@ html, body {
   font-size: 14px;
   color: rgba(255,255,255,0.75);
   cursor: pointer;
-  border-radius: 0;
   transition: all 0.15s ease;
   border-left: 2px solid transparent;
 }
@@ -877,7 +822,7 @@ html, body {
   font-weight: 600;
 }
 
-/* ─── BOTÓN FLOTANTE PARA ABRIR ───────────────────────────── */
+/* ─── SIDEBAR OPEN BTN ───────────────────────────────────── */
 
 .sidebar-open-btn {
   position: fixed;
