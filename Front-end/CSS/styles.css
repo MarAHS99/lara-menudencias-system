@@ -95,9 +95,7 @@ html, body {
   box-shadow: 0 12px 35px rgba(127,119,221,0.3);
 }
 
-.menu-btn:active {
-  transform: scale(0.96);
-}
+.menu-btn:active { transform: scale(0.96); }
 
 /* ─── BTN BACK ───────────────────────────────────────────── */
 
@@ -122,9 +120,7 @@ html, body {
 
 /* ─── SECTION VISIBILITY ─────────────────────────────────── */
 
-.section-hidden {
-  display: none;
-}
+.section-hidden { display: none; }
 
 /* ─── WATERMARK ──────────────────────────────────────────── */
 
@@ -145,7 +141,7 @@ html, body {
   left: 50%;
   width: 380px;
   height: 380px;
-  background-image: url('ImageLog/LogoH.png');
+  background-image: url('assets/LogoWm.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -157,18 +153,8 @@ html, body {
 }
 
 /* ─── SECTION ARCHITECTURE ───────────────────────────────── */
-/*
-  .section-header   → wraps the tab bar
-  .section-tabs     → flex container for tabs
-  .section-tab      → individual tab button
-  .section-body     → padding wrapper for panel content
-  .section-panel    → top-level subsection container (replaces ventas-panel, stock-panel)
-  .section-panel-inner → inner card (replaces stock-panel inner box)
-*/
 
-.section-header {
-  padding: 0 24px 16px;
-}
+.section-header { padding: 0 24px 16px; }
 
 .section-tabs {
   display: flex;
@@ -197,17 +183,10 @@ html, body {
   border-color: var(--lara-purple);
 }
 
-.section-body {
-  padding: 0 24px 24px;
-}
+.section-body { padding: 0 24px 24px; }
 
-.section-panel {
-  display: block;
-}
-
-.section-panel.section-hidden {
-  display: none;
-}
+.section-panel { display: block; }
+.section-panel.section-hidden { display: none; }
 
 .section-panel-inner {
   background: rgba(255,255,255,0.04);
@@ -227,20 +206,14 @@ html, body {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  gap: 16px;
 }
 
 .header-left {
   display: flex;
   align-items: center;
   gap: 16px;
-}
-
-.header-logo {
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  min-width: 0;
 }
 
 .lara-logo {
@@ -262,34 +235,37 @@ html, body {
 }
 
 .lara-nro {
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 600;
   color: var(--lara-purple);
   background: linear-gradient(135deg, rgba(127,119,221,0.15) 0%, rgba(127,119,221,0.08) 100%);
   border-radius: 8px;
-  padding: 12px 16px;
+  padding: 10px 14px;
   text-align: center;
   border: 1px solid var(--lara-border);
   box-shadow: 0 2px 8px rgba(127,119,221,0.1);
   white-space: nowrap;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: monospace;
+  flex-shrink: 0;
 }
 
 /* ─── BOLETA BODY ────────────────────────────────────────── */
 
-.lara-body {
-  padding: 20px 24px;
-}
+.lara-body { padding: 20px 24px; }
 
 .lara-meta {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
 .lara-field label {
   display: block;
-  font-size: 12px;
+  font-size: 11px;
   color: rgba(255,255,255,0.6);
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -303,9 +279,9 @@ html, body {
   background: rgba(255,255,255,0.08);
   border: 2px solid var(--lara-border);
   border-radius: 10px;
-  padding: 10px 12px;
+  padding: 10px 10px;
   color: #fff;
-  font-size: 14px;
+  font-size: 13px;
   box-sizing: border-box;
   outline: none;
   transition: all 0.2s ease;
@@ -365,18 +341,15 @@ html, body {
   transition: all 0.2s ease;
 }
 
-.lara-table tbody tr:last-child { border-bottom: none; }
-
-.lara-table tbody tr:hover        { background: var(--lara-row-hover); }
-.lara-table tbody tr.active-row   { background: rgba(127,119,221,0.18); }
+.lara-table tbody tr:last-child  { border-bottom: none; }
+.lara-table tbody tr:hover       { background: var(--lara-row-hover); }
+.lara-table tbody tr.active-row  { background: rgba(127,119,221,0.18); }
 .lara-table tbody tr:focus-within {
   background: rgba(127,119,221,0.12);
   box-shadow: inset 0 0 0 1px var(--lara-purple);
 }
 
-.lara-table tbody td {
-  padding: 6px 8px;
-}
+.lara-table tbody td { padding: 6px 8px; }
 
 .prod-name {
   font-size: 14px;
@@ -412,10 +385,7 @@ html, body {
   font-weight: 600;
 }
 
-.cant {
-  font-weight: 600;
-  text-align: center;
-}
+.cant { font-weight: 600; text-align: center; }
 
 .subtotal-cell {
   font-size: 14px;
@@ -503,7 +473,7 @@ html, body {
   box-shadow: 0 8px 25px rgba(127,119,221,0.4);
 }
 
-.btn-primary:active { transform: scale(0.96); }
+.btn-primary:active  { transform: scale(0.96); }
 
 .btn-secondary {
   background: rgba(255,255,255,0.08);
@@ -641,10 +611,7 @@ html, body {
   animation: growBar 0.6s ease forwards;
 }
 
-.bar:hover {
-  opacity: 0.9;
-  transform: scaleX(1.05);
-}
+.bar:hover { opacity: 0.9; transform: scaleX(1.05); }
 
 .bar-label {
   position: absolute;
@@ -694,10 +661,10 @@ html, body {
 .fade-in  { animation: fadeIn  0.4s ease forwards; }
 .slide-up { animation: slideUp 0.4s ease forwards; }
 
-@keyframes fadeIn  { from { opacity: 0; }                        to { opacity: 1; } }
+@keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
 @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes growBar { from { transform: scaleY(0); }              to { transform: scaleY(1); } }
-@keyframes spin    { to   { transform: rotate(360deg); } }
+@keyframes growBar { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes spin    { to { transform: rotate(360deg); } }
 
 .metric-card:nth-child(1) { animation-delay: 0.05s; }
 .metric-card:nth-child(2) { animation-delay: 0.10s; }
