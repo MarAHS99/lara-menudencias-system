@@ -15,7 +15,7 @@
 
     <!-- ═══════════════════════════════════════════════════════
          HOME
-    ══════════════════════════════════════════════════════ -->
+    ════════════════════════════════════════════════════════ -->
     <section id="home">
       <div class="main-menu">
         <button class="menu-btn" onclick="showSection('ventas')">Ventas</button>
@@ -33,8 +33,8 @@
 
       <div class="section-header">
         <div class="section-tabs">
-          <button class="section-tab active" id="tab-ventas-crear"    onclick="showVentasTab('crear')">Crear Boleta</button>
-          <button class="section-tab"        id="tab-ventas-cc"       onclick="showVentasTab('cc')">Cuentas Corrientes</button>
+          <button class="section-tab active" id="tab-ventas-crear"     onclick="showVentasTab('crear')">Crear Boleta</button>
+          <button class="section-tab"        id="tab-ventas-cc"        onclick="showVentasTab('cc')">Cuentas Corrientes</button>
           <button class="section-tab"        id="tab-ventas-historial" onclick="showVentasTab('historial')">Historial</button>
         </div>
       </div>
@@ -48,14 +48,24 @@
               <div class="lara-sub">Sistema de gestión · Carga de boleta</div>
             </div>
           </div>
-          <div class="lara-nro">N° <span id="nro-boleta">008852</span></div>
+          <div class="lara-nro" id="nro-boleta">—</div>
         </div>
 
         <div class="lara-body">
           <div class="lara-meta">
             <div class="lara-field">
               <label>Fecha</label>
-              <input type="date" id="fecha" value="2026-03-27">
+              <input type="date" id="fecha">
+            </div>
+            <div class="lara-field">
+              <label>Localidad</label>
+              <select id="locacion">
+                <option value="">— Seleccionar —</option>
+                <option value="M">Miramar</option>
+                <option value="MDP">Mar del Plata</option>
+                <option value="O">Otamendi</option>
+                <option value="B">Balcarce</option>
+              </select>
             </div>
             <div class="lara-field">
               <label>Cliente</label>
@@ -144,7 +154,11 @@
             <div class="lara-totals">
               <div class="total-row">
                 <span class="total-label">Saldo anterior</span>
-                <span class="total-value"><input type="number" id="saldo-ant" value="0" style="background:transparent;border:none;border-bottom:1px solid rgba(127,119,221,0.3);color:#fff;font-size:14px;font-weight:500;width:90px;text-align:right;outline:none;" oninput="calcTotales()"></span>
+                <span class="total-value">
+                  <input type="number" id="saldo-ant" value="0"
+                    style="background:transparent;border:none;border-bottom:1px solid rgba(127,119,221,0.3);color:#fff;font-size:14px;font-weight:500;width:90px;text-align:right;outline:none;"
+                    oninput="calcTotales()">
+                </span>
               </div>
               <div class="total-row">
                 <span class="total-label">Total boleta</span>
@@ -152,7 +166,11 @@
               </div>
               <div class="total-row">
                 <span class="total-label">Entrega</span>
-                <span class="total-value"><input type="number" id="entrega" value="0" style="background:transparent;border:none;border-bottom:1px solid rgba(127,119,221,0.3);color:#fff;font-size:14px;font-weight:500;width:90px;text-align:right;outline:none;" oninput="calcTotales()"></span>
+                <span class="total-value">
+                  <input type="number" id="entrega" value="0"
+                    style="background:transparent;border:none;border-bottom:1px solid rgba(127,119,221,0.3);color:#fff;font-size:14px;font-weight:500;width:90px;text-align:right;outline:none;"
+                    oninput="calcTotales()">
+                </span>
               </div>
               <div class="total-row">
                 <span class="total-label">Debe</span>
@@ -160,7 +178,7 @@
               </div>
             </div>
             <div class="lara-actions">
-              <button class="btn-primary" onclick="guardarBoleta()">Guardar boleta</button>
+              <button class="btn-primary"   onclick="guardarBoleta()">Guardar boleta</button>
               <button class="btn-secondary" onclick="limpiarForm()">Nueva boleta</button>
               <button class="btn-secondary" onclick="showVentasTab('historial')">Ver historial</button>
             </div>
@@ -185,7 +203,7 @@
           <div class="section-panel-inner" style="text-align:center; padding: 48px 24px;">
             <div style="font-size: 32px; margin-bottom: 16px;">📋</div>
             <div style="font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px;">Historial de Boletas</div>
-            <div style="font-size: 14px; color: rgba(255,255,255,0.4);">Próximamente disponible</div>
+            <div style="font-size: 14px; color: rgba(255,255,255,0.4);">Cargando...</div>
           </div>
         </div>
       </div><!-- /ventas-historial -->
@@ -209,6 +227,11 @@
       <!-- compras-cargar -->
       <div id="compras-cargar" class="section-panel">
         <div class="section-body">
+          <div style="padding: 0 0 16px 0;">
+            <button class="btn-primary" onclick="guardarCompra()" style="width:auto; min-width:160px;">
+              Guardar compra
+            </button>
+         </div>
           <div class="section-panel-inner">
             <div class="lara-table-wrap">
               <table class="lara-table" id="tabla-stock">
@@ -372,76 +395,76 @@
         <div class="sidebar-group">
           <div class="sidebar-location">📍 Miramar</div>
           <ul class="sidebar-clients">
-            <li onclick="selectClient('Beto')">Beto</li>
-            <li onclick="selectClient('Cecchi')">Cecchi</li>
-            <li onclick="selectClient('Campomar 1')">Campomar 1</li>
-            <li onclick="selectClient('Campomar 2')">Campomar 2</li>
-            <li onclick="selectClient('Luis Mitre')">Luis Mitre</li>
-            <li onclick="selectClient('Don Renato')">Don Renato</li>
-            <li onclick="selectClient('Nano')">Nano</li>
-            <li onclick="selectClient('Mingo')">Mingo</li>
-            <li onclick="selectClient('Mario')">Mario</li>
-            <li onclick="selectClient('Parquemar')">Parquemar</li>
-            <li onclick="selectClient('La Tradicional')">La Tradicional</li>
-            <li onclick="selectClient('Buena Vibra')">Buena Vibra</li>
-            <li onclick="selectClient('San Andres')">San Andres</li>
-            <li onclick="selectClient('Manuel Gomero')">Manuel Gomero</li>
-            <li onclick="selectClient('Angulo')">Angulo</li>
-            <li onclick="selectClient('Pamela')">Pamela</li>
-            <li onclick="selectClient('Turco Ducato')">Turco Ducato</li>
-            <li onclick="selectClient('El Mercadito')">El Mercadito</li>
-            <li onclick="selectClient('El Audaz')">El Audaz</li>
+            <li onclick="selectClient('Beto', 'M')">Beto</li>
+            <li onclick="selectClient('Cecchi', 'M')">Cecchi</li>
+            <li onclick="selectClient('Campomar 1', 'M')">Campomar 1</li>
+            <li onclick="selectClient('Campomar 2', 'M')">Campomar 2</li>
+            <li onclick="selectClient('Luis Mitre', 'M')">Luis Mitre</li>
+            <li onclick="selectClient('Don Renato', 'M')">Don Renato</li>
+            <li onclick="selectClient('Nano', 'M')">Nano</li>
+            <li onclick="selectClient('Mingo', 'M')">Mingo</li>
+            <li onclick="selectClient('Mario', 'M')">Mario</li>
+            <li onclick="selectClient('Parquemar', 'M')">Parquemar</li>
+            <li onclick="selectClient('La Tradicional', 'M')">La Tradicional</li>
+            <li onclick="selectClient('Buena Vibra', 'M')">Buena Vibra</li>
+            <li onclick="selectClient('San Andres', 'M')">San Andres</li>
+            <li onclick="selectClient('Manuel Gomero', 'M')">Manuel Gomero</li>
+            <li onclick="selectClient('Angulo', 'M')">Angulo</li>
+            <li onclick="selectClient('Pamela', 'M')">Pamela</li>
+            <li onclick="selectClient('Turco Ducato', 'M')">Turco Ducato</li>
+            <li onclick="selectClient('El Mercadito', 'M')">El Mercadito</li>
+            <li onclick="selectClient('El Audaz', 'M')">El Audaz</li>
           </ul>
         </div>
 
         <div class="sidebar-group">
           <div class="sidebar-location">📍 Mar del Plata</div>
           <ul class="sidebar-clients">
-            <li onclick="selectClient('Chino Alvarado')">Chino Alvarado</li>
-            <li onclick="selectClient('El Palenque')">El Palenque</li>
-            <li onclick="selectClient('Jose Soip')">Jose Soip</li>
-            <li onclick="selectClient('Mauro Kalle')">Mauro Kalle</li>
-            <li onclick="selectClient('Miguelito')">Miguelito</li>
-            <li onclick="selectClient('Tucu')">Tucu</li>
-            <li onclick="selectClient('Vicente')">Vicente</li>
-            <li onclick="selectClient('Pol')">Pol</li>
-            <li onclick="selectClient('Salucla')">Salucla</li>
-            <li onclick="selectClient('Ale')">Ale</li>
-            <li onclick="selectClient('Italo Lo de Martin')">Italo Lo de Martin</li>
+            <li onclick="selectClient('Chino Alvarado', 'MDP')">Chino Alvarado</li>
+            <li onclick="selectClient('El Palenque', 'MDP')">El Palenque</li>
+            <li onclick="selectClient('Jose Soip', 'MDP')">Jose Soip</li>
+            <li onclick="selectClient('Mauro Kalle', 'MDP')">Mauro Kalle</li>
+            <li onclick="selectClient('Miguelito', 'MDP')">Miguelito</li>
+            <li onclick="selectClient('Tucu', 'MDP')">Tucu</li>
+            <li onclick="selectClient('Vicente', 'MDP')">Vicente</li>
+            <li onclick="selectClient('Pol', 'MDP')">Pol</li>
+            <li onclick="selectClient('Salucla', 'MDP')">Salucla</li>
+            <li onclick="selectClient('Ale', 'MDP')">Ale</li>
+            <li onclick="selectClient('Italo Lo de Martin', 'MDP')">Italo Lo de Martin</li>
           </ul>
         </div>
 
         <div class="sidebar-group">
           <div class="sidebar-location">📍 Otamendi</div>
           <ul class="sidebar-clients">
-            <li onclick="selectClient('Gargiulo')">Gargiulo</li>
-            <li onclick="selectClient('Globo')">Globo</li>
-            <li onclick="selectClient('Beades')">Beades</li>
-            <li onclick="selectClient('Chino Ota')">Chino Ota</li>
-            <li onclick="selectClient('Padilla')">Padilla</li>
+            <li onclick="selectClient('Gargiulo', 'O')">Gargiulo</li>
+            <li onclick="selectClient('Globo', 'O')">Globo</li>
+            <li onclick="selectClient('Beades', 'O')">Beades</li>
+            <li onclick="selectClient('Chino Ota', 'O')">Chino Ota</li>
+            <li onclick="selectClient('Padilla', 'O')">Padilla</li>
           </ul>
         </div>
 
         <div class="sidebar-group">
           <div class="sidebar-location">📍 Balcarce</div>
           <ul class="sidebar-clients">
-            <li onclick="selectClient('Balcarce Carnes')">Balcarce Carnes</li>
-            <li onclick="selectClient('Augusto')">Augusto</li>
-            <li onclick="selectClient('Belmonte')">Belmonte</li>
-            <li onclick="selectClient('Patricia Eva y 106')">Patricia Eva y 106</li>
-            <li onclick="selectClient('Guille 39')">Guille 39</li>
-            <li onclick="selectClient('Jorge Gutierrez')">Jorge Gutierrez</li>
-            <li onclick="selectClient('Valeria Cajera BC 24 y 27')">Valeria Cajera BC 24 y 27</li>
-            <li onclick="selectClient('Mauro Malena')">Mauro Malena</li>
-            <li onclick="selectClient('Todo Carne M.I.')">Todo Carne M.I.</li>
-            <li onclick="selectClient('La Esq Avicola')">La Esq Avicola</li>
-            <li onclick="selectClient('Mariela Balcarce')">Mariela Balcarce</li>
-            <li onclick="selectClient('19 y 22')">19 y 22</li>
-            <li onclick="selectClient('Turco Mechongue')">Turco Mechongue</li>
-            <li onclick="selectClient('Tamara 13 y 10')">Tamara 13 y 10</li>
-            <li onclick="selectClient('Frutimar 2')">Frutimar 2</li>
-            <li onclick="selectClient('Res')">Res</li>
-            <li onclick="selectClient('Oscar 13 y 16')">Oscar 13 y 16</li>
+            <li onclick="selectClient('Balcarce Carnes', 'B')">Balcarce Carnes</li>
+            <li onclick="selectClient('Augusto', 'B')">Augusto</li>
+            <li onclick="selectClient('Belmonte', 'B')">Belmonte</li>
+            <li onclick="selectClient('Patricia Eva y 106', 'B')">Patricia Eva y 106</li>
+            <li onclick="selectClient('Guille 39', 'B')">Guille 39</li>
+            <li onclick="selectClient('Jorge Gutierrez', 'B')">Jorge Gutierrez</li>
+            <li onclick="selectClient('Valeria Cajera BC 24 y 27', 'B')">Valeria Cajera BC 24 y 27</li>
+            <li onclick="selectClient('Mauro Malena', 'B')">Mauro Malena</li>
+            <li onclick="selectClient('Todo Carne M.I.', 'B')">Todo Carne M.I.</li>
+            <li onclick="selectClient('La Esq Avicola', 'B')">La Esq Avicola</li>
+            <li onclick="selectClient('Mariela Balcarce', 'B')">Mariela Balcarce</li>
+            <li onclick="selectClient('19 y 22', 'B')">19 y 22</li>
+            <li onclick="selectClient('Turco Mechongue', 'B')">Turco Mechongue</li>
+            <li onclick="selectClient('Tamara 13 y 10', 'B')">Tamara 13 y 10</li>
+            <li onclick="selectClient('Frutimar 2', 'B')">Frutimar 2</li>
+            <li onclick="selectClient('Res', 'B')">Res</li>
+            <li onclick="selectClient('Oscar 13 y 16', 'B')">Oscar 13 y 16</li>
           </ul>
         </div>
 
